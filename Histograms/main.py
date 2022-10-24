@@ -1,16 +1,18 @@
-# This is a sample Python script.
+import numpy as np
+import cv2
+import matplotlib.pyplot as ml
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+y_boyut = 500
+x_boyut = 500
+foto = cv2.resize(cv2.imread("photo.jpg", 0), (x_boyut, y_boyut))
 
+cv2.imshow("foto", foto)
+# cv2.waitKey()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+hist = np.zeros(256, dtype=int)
+for f in range(x_boyut):
+    for k in range(y_boyut):
+        hist[foto[f, k]] = hist[foto[f, k]] + 1
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+ml.plot(hist)
+ml.show()
